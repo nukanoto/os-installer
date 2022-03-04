@@ -15,19 +15,19 @@ ntpdate -b ntp.nict.jp
 
 systemctl enable ntpd.service
 
-read -p "Press enter to edit /etc/ntp.conf:"
+read -r -p "Press enter to edit /etc/ntp.conf:"
 nvim /etc/ntp.conf
 
 hwclock -w
 
-read -p "Press enter to edit /etc/mkinitcpio.conf:"
+read -r -p "Press enter to edit /etc/mkinitcpio.conf:"
 nvim /etc/mkinitcpio.conf
 
 mkinitcpio -p linux-zen
 
 blkid
 
-read -p 'Enter partition uuid' PARTUUID
+read -r -p 'Enter partition uuid' PARTUUID
 
 mkdir -p /boot/loader/entries/
 
@@ -36,7 +36,7 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img # amd製のCPUの場合
 initrd  /initramfs-linux.img
-options luks.uuid=$DISKUUID luks.options=allow-discards root=/dev/mapper/luks-$DISKUUID rootflags=subvol=@root rw
+options luks.uuid=$PARTUUID luks.options=allow-discards root=/dev/mapper/luks-$PARTUUID rootflags=subvol=@root rw
 EOF
 
 cat << EOF > /boot/loader/loader.conf
@@ -46,7 +46,7 @@ EOF
 
 bootctl --path=/boot install
 
-useradd -m -G wheel -s /bin/bash $USER_NAME
-passwd $USER_NAME
+useradd -m -G wheel -s /bin/bash "$USER_NAME"
+passwd "$USER_NAME"
 
 EDITOR=nvim visudo

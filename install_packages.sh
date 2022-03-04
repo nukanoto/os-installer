@@ -4,21 +4,21 @@ CPU="$1"
 GPU="$2"
 WIRELESS="$3"
 
-if [ $WIRELESS == "True" ]; then
+if [ "$WIRELESS" == "True" ]; then
   WIRELESS=1
-elif [ $WIRELESS == "False" ]; then
+elif [ "$WIRELESS" == "False" ]; then
   WIRELESS=0
 fi
 
 BASE_PKGS='base-devel linux-zen linux-firmware dosfstools efibootmgr btrfs-progs neovim dhcpcd ntp sed'
 
-if [ $CPU == "amd" ]; then
+if [ "$CPU" == "amd" ]; then
   BASE_PKGS+=" amd-ucode"
-elif [ $CPU == "intel" ]; then
+elif [ "$CPU" == "intel" ]; then
   BASE_PKGS+=" intel-ucode"
 fi
 
-if [ $GPU == "nvidia" ]; then
+if [ "$GPU" == "nvidia" ]; then
   BASE_PKGS+=" nvidia"
 fi
 
@@ -37,4 +37,4 @@ EOF
 
 pacman -Syy
 
-pacstrap /mnt $BASE_PKGS
+pacstrap /mnt "$BASE_PKGS"

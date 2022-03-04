@@ -7,9 +7,10 @@ resolvectl status
 sudo localectl set-keymap jp106
 
 git clone https://aur.archlinux.org/paru
-cd paru
-makepkg -si
-cd ..
+(
+  cd paru || exit
+  makepkg -si
+)
 rm -rf paru
 
 sudo hostnamectl set-hostname archlinux

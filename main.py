@@ -76,8 +76,8 @@ with open("/mnt/opt/configure.sh", "x", encoding="utf-8", newline="\n") as f:
 #!/bin/bash
 
 /opt/2_configure_system.sh
-/opt/2_install_packages.sh {} {}
+/opt/2_install_packages.sh {}
 """.format(
-            args.wireless, args.display_server
+            args.display_server
         )
     )
