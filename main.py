@@ -74,6 +74,8 @@ args.encrypt = args.no_encrypt
 if args.gpu == "nvidia":
     args.display_server = "wayland"
 
+args.wireless = str(args.wireless)
+
 # TODO: add no-enrypt mode
 
 step(1, runscript, ["make_partitions", [args.drive]])
