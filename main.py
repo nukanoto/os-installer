@@ -82,7 +82,7 @@ step(1, runscript, ["make_partitions", [args.drive]])
 step(
     2,
     runscript,
-    ["mount_system", [args.cpu, args.gpu, args.wireless, args.display_server]],
+    ["mount_system", [args.drive]],
 )
 step(
     3,
