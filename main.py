@@ -15,7 +15,7 @@ def readstep() -> int:
 
 
 def writestep(s: int):
-    with open(steppath, encoding="utf-8", newline="\n") as f:
+    with open(steppath, "w", encoding="utf-8", newline="\n") as f:
         f.write(str(s))
 
 
