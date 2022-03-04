@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 INSTALL_DRIVE="$1"
 
 mount -o subvol=@root /dev/mapper/cryptroot /mnt

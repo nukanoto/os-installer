@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 INSTALL_DRIVE="$1"
 
 wipefs --all "$INSTALL_DRIVE"

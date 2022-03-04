@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 CPU="$1"
 GPU="$2"
 WIRELESS="$3"

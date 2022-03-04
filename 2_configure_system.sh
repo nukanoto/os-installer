@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 sudo systemctl start systemd-resolved
 sudo systemctl enable systemd-resolved
 resolvectl status

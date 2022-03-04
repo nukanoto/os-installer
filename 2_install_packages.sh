@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 DISPLAY_SERVER="$1"
 
 BASE_PKGS='noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols ttf-jetbrains-mono i3status-rust alsa-utils bluez curl fakeroot lm_sensors networkmanager speedtest-cli upower rofi alacritty fcitx5 fcitx5-im fcitx5-mozc-ut'
