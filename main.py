@@ -1,9 +1,28 @@
 #!/usr/bin/env python
 
 import argparse, os, subprocess, shutil
+from typing import Callable, List
 
 programpath = os.getcwd()
 programdir = os.path.dirname(programpath)
+
+steppath = "./.step"
+
+
+def readstep() -> int:
+    with open(steppath, "x", encoding="utf-8", newline="\n") as f:
+        return int(f.read())
+
+
+def writestep(s: int):
+    with open(steppath, "x", encoding="utf-8", newline="\n") as f:
+        f.write(str(s))
+
+
+def step(s: int, f: Callable, args: List = []):
+    if s > readstep():
+        f(*args)
+        writestep(s)
 
 
 def arch_setup():
@@ -57,13 +76,21 @@ if args.gpu == "nvidia":
 
 # TODO: add no-enrypt mode
 
-runscript("make_partitions", [args.drive])
-runscript("mount_system", [args.cpu, args.gpu, args.wireless, args.display_server])
-runscript("install_packages", [args.cpu, args.gpu, args.wireless, args.display_server])
+step(1, runscript, ["make_partitions", [args.drive]])
+step(
+    2,
+    runscript,
+    ["mount_system", [args.cpu, args.gpu, args.wireless, args.display_server]],
+)
+step(
+    3,
+    runscript,
+    ["install_packages", [args.cpu, args.gpu, args.wireless, args.display_server]],
+)
 
-arch_setup()
+step(4, arch_setup)
 
-arch_runscript("configure_system", [args.user])
+step(5, arch_runscript, ["configure_system", [args.user]])
 
 with open("/mnt/opt/configure.sh", "x", encoding="utf-8", newline="\n") as f:
     f.write(
