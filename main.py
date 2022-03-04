@@ -3,8 +3,7 @@
 import argparse, os, subprocess, shutil
 from typing import Callable, List
 
-programpath = os.getcwd()
-programdir = os.path.dirname(programpath)
+programdir = os.getcwd()
 
 steppath = "./.step"
 
@@ -78,25 +77,24 @@ args.encrypt = args.no_encrypt
 if args.gpu == "nvidia":
     args.display_server = "wayland"
 
-args.wireless = str(args.wireless)
-
 # TODO: add no-enrypt mode
 
-step(1, runscript, ["make_partitions", [args.drive]])
+step(1, runscript, ["prepare_installation"])
+step(2, runscript, ["make_partitions", [args.drive]])
 step(
-    2,
+    3,
     runscript,
     ["mount_system", [args.drive]],
 )
 step(
-    3,
+    4,
     runscript,
-    ["install_packages", [args.cpu, args.gpu, args.wireless, args.display_server]],
+    ["install_packages", [args.cpu, args.gpu, str(args.wireless), args.display_server]],
 )
 
-step(4, arch_setup)
+step(6, arch_setup)
 
-step(5, arch_runscript, ["configure_system", [args.user]])
+step(7, arch_runscript, ["configure_system", [args.drive, args.user]])
 
 with open("/mnt/opt/configure.sh", "w", encoding="utf-8", newline="\n") as f:
     f.write(

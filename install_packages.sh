@@ -24,6 +24,7 @@ if [ "$GPU" == "nvidia" ]; then
   BASE_PKGS+=" nvidia"
 fi
 
+# TODO: install iwd if wireless is false
 if [ $WIRELESS ]; then
   BASE_PKGS+=" iwd"
 fi
@@ -39,4 +40,4 @@ EOF
 
 pacman -Syy
 
-pacstrap /mnt "$BASE_PKGS"
+pacstrap /mnt $BASE_PKGS
