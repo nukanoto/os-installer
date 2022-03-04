@@ -6,13 +6,6 @@ programpath = os.getcwd()
 programdir = os.path.dirname(programpath)
 
 
-def dir_path(string):
-    if os.path.isdir(string):
-        return string
-    else:
-        raise NotADirectoryError(string)
-
-
 def arch_setup():
     shutil.copytree(programdir, "/mnt/opt/os-installer", copy_function=shutil.copy2)
 
@@ -29,7 +22,7 @@ def runscript(name: str, args: list[str] = []):
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "-d", "--drive", help="Specify the installation drive", type=dir_path, required=True
+    "-d", "--drive", help="Specify the installation drive", type=str, required=True
 )
 parser.add_argument(
     "--no-encrypt", help="Don't encrypt the drive", action="store_false"
@@ -61,6 +54,8 @@ args.encrypt = args.no_encrypt
 
 if args.gpu == "nvidia":
     args.display_server = "wayland"
+
+# TODO: add no-enrypt mode
 
 runscript("make_partitions", [args.drive])
 runscript("mount_system", [args.cpu, args.gpu, args.wireless, args.display_server])
