@@ -17,7 +17,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 EOF
 
-  echo 'exec i3' > ~/.xprofile
+  echo 'exec i3' > ~/.xinitrc
 fi
 
 

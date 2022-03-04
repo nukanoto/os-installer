@@ -1,8 +1,5 @@
 #!/bin/bash
 
-WIRELESS="$1"
-DISPLAY_SERVER="$2"
-
 sudo systemctl start systemd-resolved
 sudo systemctl enable systemd-resolved
 resolvectl status

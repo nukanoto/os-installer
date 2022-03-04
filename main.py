@@ -11,11 +11,11 @@ def dir_path(string):
 
 
 def arch_setup():
-    shutil.copytree(programdir, '/mnt/tmp/os-installer', copy_function=shutil.copy2)
+    shutil.copytree(programdir, '/mnt/opt/os-installer', copy_function=shutil.copy2)
 
 
 def arch_runscript(name: str, args: list[str] = []):
-    subprocess.run(['arch-chroot', '/mnt', '/tmp/os-installer/{}.sh'.format(name), *args])
+    subprocess.run(['arch-chroot', '/mnt', '/opt/os-installer/{}.sh'.format(name), *args])
 
 
 def runscript(name: str, args: list[str] = []):
@@ -43,3 +43,12 @@ runscript('install_packages', [args.cpu, args.gpu, args.wireless, args.display_s
 arch_setup()
 
 arch_runscript('configure_system', [args.user])
+
+with open('/mnt/opt/configure.sh', 'x', encoding='utf-8', newline='\n') as f:
+  f.write(
+"""
+#!/bin/bash
+
+/opt/2_configure_system.sh
+/opt/2_install_packages.sh {} {}
+""".format(args.wireless, args.display_server))
