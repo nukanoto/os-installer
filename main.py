@@ -26,7 +26,11 @@ def step(s: int, f: Callable, args: List = []):
 
 
 def arch_setup():
-    shutil.copytree(programdir, "/mnt/opt/os-installer", copy_function=shutil.copy2)
+    try:
+        shutil.copytree(programdir, "/mnt/opt/os-installer", copy_function=shutil.copy2)
+    except FileExistsError:
+        shutil.rmtree("/mnt/opt/os-installer")
+        arch_setup()
 
 
 def arch_runscript(name: str, args: list[str] = []):
