@@ -98,7 +98,7 @@ step(4, arch_setup)
 
 step(5, arch_runscript, ["configure_system", [args.user]])
 
-with open("/mnt/opt/configure.sh", "x", encoding="utf-8", newline="\n") as f:
+with open("/mnt/opt/configure.sh", "w", encoding="utf-8", newline="\n") as f:
     f.write(
         """
 #!/bin/bash
