@@ -10,12 +10,12 @@ steppath = "./.step"
 
 
 def readstep() -> int:
-    with open(steppath, "x", encoding="utf-8", newline="\n") as f:
+    with open(steppath, encoding="utf-8", newline="\n") as f:
         return int(f.read())
 
 
 def writestep(s: int):
-    with open(steppath, "x", encoding="utf-8", newline="\n") as f:
+    with open(steppath, encoding="utf-8", newline="\n") as f:
         f.write(str(s))
 
 
