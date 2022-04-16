@@ -11,6 +11,10 @@ sudo localectl set-keymap jp106
 git clone https://aur.archlinux.org/paru
 (
   cd paru || exit
+
+  sudo pacman -S rustup --noconfirm
+  rustup default stable
+
   makepkg -si
 )
 rm -rf paru

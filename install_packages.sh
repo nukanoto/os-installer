@@ -12,7 +12,7 @@ elif [ "$WIRELESS" == "False" ]; then
   WIRELESS=0
 fi
 
-BASE_PKGS='base-devel linux-zen linux-firmware dosfstools efibootmgr btrfs-progs neovim dhcpcd ntp sed'
+BASE_PKGS='base base-devel linux-zen linux-firmware dosfstools efibootmgr btrfs-progs neovim dhcpcd ntp sed git'
 
 if [ "$CPU" == "amd" ]; then
   BASE_PKGS+=" amd-ucode"
