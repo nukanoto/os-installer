@@ -75,7 +75,7 @@ args = parser.parse_args()
 args.encrypt = args.no_encrypt
 
 if args.gpu == "nvidia":
-    args.display_server = "wayland"
+    args.display_server = "x11"
 
 # TODO: add no-enrypt mode
 
