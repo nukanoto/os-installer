@@ -2,4 +2,4 @@
 
 set -e
 
-pacman -S neovim arch-install-scripts --noconfirm
+pacman -Sy neovim arch-install-scripts --noconfirm
